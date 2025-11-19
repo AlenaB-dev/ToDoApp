@@ -3,6 +3,15 @@ import "./App.css";
 import Button from "./components/UI/Button.jsx";
 
 function App() {
+  // showing current date and day
+  const date = new Date();
+  const formattedDate = date.toLocaleDateString("en-GB", {
+    weekday: "long",
+    day: "2-digit",
+    month: "long",
+    year: "numeric",
+  });
+
   // handle button actions
   const handleClear = () => {
     console.log("Clear completed task");
@@ -14,6 +23,7 @@ function App() {
 
   return (
     <>
+      <p className="date">{formattedDate}</p>
       <h1>My ToDos</h1>
       <p>tasks</p>
 
