@@ -1,18 +1,16 @@
 import { categories } from "../utils/categories";
+import styles from "./TodoActions.module.css";
 
 const TodoActions = ({ onSelect }) => {
   return (
-    <div style={{ display: "flex", gap: "12px", padding: "10px" }}>
+    <div className={styles.wrapper}>
       {categories.map((cat) => (
         <button
           key={cat.id}
           onClick={() => onSelect(cat.id)}
-          style={{
-            border: "none",
-            background: "transparent",
-            fontSize: "24px",
-            cursor: "pointer",
-          }}
+          className={`${styles.button} ${
+            selected === cat.id ? styles.active : ""
+          }`}
           title={cat.label}
         >
           {cat.icon}
