@@ -1,7 +1,7 @@
-import { categories } from "../utils/categories";
+import { categories } from "../../utils/categories.jsx";
 import styles from "./TodoActions.module.css";
 
-const TodoActions = ({ onSelect }) => {
+const TodoActions = ({ selected, onSelect }) => {
   return (
     <div className={styles.wrapper}>
       {categories.map((cat) => (

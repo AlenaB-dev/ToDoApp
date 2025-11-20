@@ -1,5 +1,7 @@
 import { useState } from "react";
 import "./App.css";
+import styles from "./components/UI/Modal.module.css";
+import AddTaskForm from "./components/Todos/AddTaskForm.jsx";
 import Button from "./components/UI/Button.jsx";
 
 function App() {
@@ -17,8 +19,10 @@ function App() {
     console.log("Clear completed task");
   };
 
+  // add new task btn
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const handleAdd = () => {
-    console.log("Add new task");
+    setIsModalOpen(true);
   };
 
   return (
@@ -38,6 +42,19 @@ function App() {
       <Button onClick={handleAdd} className="add-btn">
         Add new task
       </Button>
+      {isModalOpen && (
+        <div
+          className={styles.modalBackdrop}
+          onClick={() => setIsModalOpen(false)}
+        >
+          <div
+            className={styles.modalWindow}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <AddTaskForm onClose={() => setIsModalOpen(false)} />
+          </div>
+        </div>
+      )}
     </>
   );
 }

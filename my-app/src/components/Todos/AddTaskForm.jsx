@@ -1,6 +1,5 @@
 import { useState } from "react";
-import { categories } from "../utils/categories";
-import TodoActions from "./TodoActions";
+import TodoActions from "./TodoActions.jsx";
 
 const AddTaskForm = ({ onSubmit, onClose }) => {
   const [title, setTitle] = useState("");
@@ -10,34 +9,40 @@ const AddTaskForm = ({ onSubmit, onClose }) => {
 
   const handleSubmit = () => {
     onSubmit({ title, text, category, dueDate });
+    onClose();
   };
-  onClose();
+
+  return (
+    <div>
+      <h2>Add New Task</h2>
+      <label>
+        Title:{" "}
+        <input
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          type="text"
+        />
+      </label>
+      <label>
+        Note:{" "}
+        <textarea value={text} onChange={(e) => setText(e.target.value)} />
+      </label>
+
+      <TodoActions selected={category} onSelect={setCategory} />
+
+      <label>
+        Due date:{" "}
+        <input
+          type="datetime-local"
+          value={dueDate}
+          onChange={(e) => setDueDate(e.target.value)}
+        />
+      </label>
+
+      <button onClick={handleSubmit}>Save</button>
+      <button onClick={onClose}>Cancel</button>
+    </div>
+  );
 };
-return (
-  <div>
-    <h2>Add New Task</h2>
-    <label>
-      Title:{" "}
-      <input
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-        type="text"
-      />
-    </label>
-    <label>
-      Note: <textarea value={text} onChange={(e) => setText(e.target.value)} />
-    </label>
-    <TodoActions selected={category} onSelect={(cat) => setCategory(cat)} />
-    <label>
-      Due date:{" "}
-      <input
-        type="datetime-local"
-        value={dueDate}
-        onChange={(e) => setDueDate(e.target.value)}
-      />
-    </label>
-    <button onClick={handleSubmit}>Save</button>
-  </div>
-);
 
 export default AddTaskForm;
