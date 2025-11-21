@@ -1,6 +1,8 @@
 import { useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 import "./App.css";
 import styles from "./components/UI/Modal.module.css";
+import TodoTasksList from "./components/Todos/TodoTasksList.jsx";
 import AddTaskForm from "./components/Todos/AddTaskForm.jsx";
 import Button from "./components/UI/Button.jsx";
 
@@ -14,6 +16,18 @@ function App() {
     year: "numeric",
   });
 
+  // handle tasks list
+  const [todos, setTodos] = useState([]);
+
+  const addTodoHandler = (text) => {
+    const newTodo = {
+      text,
+      isComplited: false,
+      id: uuidv4(),
+    };
+    setTodos([...todos, newTodo]);
+  };
+
   // handle button actions
   const handleClear = () => {
     console.log("Clear completed task");
@@ -25,13 +39,19 @@ function App() {
     setIsModalOpen(true);
   };
 
+  // delete todo
+
+  // mark todo completed
+
+  //
+
   return (
     <>
       <p className="date">{formattedDate}</p>
       {!isModalOpen && (
         <>
           <h1>My ToDos</h1>
-          <p>tasks</p>
+          <TodoTasksList todos={todos} />
 
           <h2>Completed</h2>
 
