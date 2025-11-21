@@ -14,7 +14,7 @@ const AddTaskForm = ({ onSubmit, onClose }) => {
 
   return (
     <div>
-      <h2>Add New Task</h2>
+      <h2>New Task</h2>
       <label>
         Title:{" "}
         <input

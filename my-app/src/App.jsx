@@ -28,20 +28,25 @@ function App() {
   return (
     <>
       <p className="date">{formattedDate}</p>
-      <h1>My ToDos</h1>
-      <p>tasks</p>
+      {!isModalOpen && (
+        <>
+          <h1>My ToDos</h1>
+          <p>tasks</p>
 
-      <h2>Completed</h2>
+          <h2>Completed</h2>
 
-      <p>tasks</p>
+          <p>tasks</p>
 
-      <Button onClick={handleClear} className="clear-btn">
-        Clear
-      </Button>
+          <Button onClick={handleClear} className="clear-btn">
+            Clear
+          </Button>
 
-      <Button onClick={handleAdd} className="add-btn">
-        Add new task
-      </Button>
+          <Button onClick={handleAdd} className="add-btn">
+            Add new task
+          </Button>
+        </>
+      )}
+
       {isModalOpen && (
         <div
           className={styles.modalBackdrop}
