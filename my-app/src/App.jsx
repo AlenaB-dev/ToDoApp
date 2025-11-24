@@ -58,9 +58,8 @@ function App() {
   // modal
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  // const handleAdd = () => {
-  //   setIsModalOpen(true);
-  // };
+  const activeTodos = todos.filter((t) => !t.isCompleted);
+  const completedTodos = todos.filter((t) => t.isCompleted);
 
   return (
     <>
@@ -73,7 +72,7 @@ function App() {
           {/* ACTIVE */}
 
           <TodoTasksList
-            todos={todos.filter((t) => !t.isCompleted)}
+            todos={activeTodos}
             deleteTodo={deleteTodoHandler}
             toggleTodo={toggleTodoHandler}
           />
@@ -82,9 +81,10 @@ function App() {
 
           <h2>Completed</h2>
           <TodoTasksList
-            todos={todos.filter((t) => t.isCompleted)}
+            todos={completedTodos}
             deleteTodo={deleteTodoHandler}
             toggleTodo={toggleTodoHandler}
+            emptyMessage="No completed tasks"
           />
 
           <Button onClick={clearCompletedHandler} className="clear-btn">
