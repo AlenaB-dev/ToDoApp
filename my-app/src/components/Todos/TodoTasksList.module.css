@@ -1,3 +1,7 @@
 .todoListContainer {
   padding: 10px;
 }
+
+.todoTaskEmpty {
+  color: #444a49;
+}

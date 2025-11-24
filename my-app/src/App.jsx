@@ -16,52 +16,82 @@ function App() {
     year: "numeric",
   });
 
-  // handle tasks list
+  // tasks list
   const [todos, setTodos] = useState([]);
 
-  const addTodoHandler = (text) => {
+  // add task
+  const addTodoHandler = ({ text, title, category, dueDate }) => {
     const newTodo = {
+      title,
       text,
+      category,
+      dueDate,
       isComplited: false,
       id: uuidv4(),
     };
     setTodos([...todos, newTodo]);
   };
 
-  // handle button actions
-  const handleClear = () => {
-    console.log("Clear completed task");
+  // delete task
+  const deleteTodoHandler = (id) => {
+    setTodos(
+      todos.map((todo) =>
+        todo.id === id ? { ...todo, isComplited: !todo.isCompleted } : todo
+      )
+    );
   };
 
-  // add new task btn
+  // toggle completed / active
+  const toggleTodoHandler = (id) => {
+    setTodos(
+      todos.map((todo) =>
+        todo.id === id ? { ...todo, isCompleted: !todo.isCompleted } : todo
+      )
+    );
+  };
+
+  // clear completed
+  const clearCompletedHandler = () => {
+    setTodos(todos.filter((todo) => !todo.isCompleted));
+  };
+
+  // modal
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const handleAdd = () => {
-    setIsModalOpen(true);
-  };
 
-  // delete todo
-
-  // mark todo completed
-
-  //
+  // const handleAdd = () => {
+  //   setIsModalOpen(true);
+  // };
 
   return (
     <>
       <p className="date">{formattedDate}</p>
+
       {!isModalOpen && (
         <>
           <h1>My ToDos</h1>
-          <TodoTasksList todos={todos} />
+
+          {/* ACTIVE */}
+
+          <TodoTasksList
+            todos={todos.filter((t) => !t.isCompleted)}
+            deleteTodo={deleteTodoHandler}
+            toggleTodo={toggleTodoHandler}
+          />
+
+          {/* COMPLETED */}
 
           <h2>Completed</h2>
+          <TodoTasksList
+            todos={todos.filter((t) => t.isCompleted)}
+            deleteTodo={deleteTodoHandler}
+            toggleTodo={toggleTodoHandler}
+          />
 
-          <p>tasks</p>
-
-          <Button onClick={handleClear} className="clear-btn">
+          <Button onClick={clearCompletedHandler} className="clear-btn">
             Clear
           </Button>
 
-          <Button onClick={handleAdd} className="add-btn">
+          <Button onClick={() => setIsModalOpen(true)} className="add-btn">
             Add new task
           </Button>
         </>
@@ -76,7 +106,10 @@ function App() {
             className={styles.modalWindow}
             onClick={(e) => e.stopPropagation()}
           >
-            <AddTaskForm onClose={() => setIsModalOpen(false)} />
+            <AddTaskForm
+              onSubmit={addTodoHandler}
+              onClose={() => setIsModalOpen(false)}
+            />
           </div>
         </div>
       )}
