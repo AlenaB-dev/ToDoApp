@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import "./App.css";
+import styles from "./App.module.css";
 import styles from "./components/UI/Modal.module.css";
 import TodoTasksList from "./components/Todos/TodoTasksList.jsx";
 import AddTaskForm from "./components/Todos/AddTaskForm.jsx";
@@ -63,7 +64,7 @@ function App() {
 
   return (
     <>
-      <p className="date">{formattedDate}</p>
+      <p className={styles.date}>{formattedDate}</p>
 
       {!isModalOpen && (
         <>
@@ -76,6 +77,8 @@ function App() {
             deleteTodo={deleteTodoHandler}
             toggleTodo={toggleTodoHandler}
           />
+
+          <hr className={styles.divider} />
 
           {/* COMPLETED */}
 

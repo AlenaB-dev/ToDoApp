@@ -1,0 +1,23 @@
+#root {
+  border: 1px solid #7fffd4;
+  border-radius: 12px;
+}
+
+body {
+  border: 1px solid #7fffd4;
+  padding: 1rem;
+}
+
+.date {
+  border-bottom: double 4px #5ea1a1;
+}
+
+h1 {
+  border-bottom: 2px dotted #7fffd4;
+}
+
+.divider {
+  background: linear-gradient(to right, transparent, #ccc, transparent);
+  height: 1px;
+  border: none;
+}
