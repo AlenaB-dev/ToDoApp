@@ -4,15 +4,19 @@
   margin-top: 8px;
 }
 
-.button {
-  border: 1px solid #ccc;
-  padding: 6px;
-  background: #df6263;
-  cursor: pointer;
-  border-radius: 6px;
-  font-size: 20px;
+.selectCategory {
+  margin-top: 6px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  background-color: rgba(255, 255, 255, 0.6);
+  font-family: "Inter", sans-serif;
+  font-size: 1rem;
+  transition: all 0.2s ease-in-out;
 }
 
-.active {
-  border: 2px solid #444;
+.selectCategory:focus {
+  outline: none;
+  border-color: teal;
+  box-shadow: 0 0 8px rgba(0, 128, 128, 0.3);
 }
