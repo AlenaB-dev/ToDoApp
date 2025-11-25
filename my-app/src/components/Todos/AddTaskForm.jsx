@@ -4,6 +4,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import enGB from "date-fns/locale/en-GB"; // английская локаль
 
 import moduleStyle from "./AddTaskForm.module.css";
+import "../UI/datepicker.css";
 import TodoActions from "./TodoActions.jsx";
 
 const AddTaskForm = ({ onSubmit, onClose }) => {
