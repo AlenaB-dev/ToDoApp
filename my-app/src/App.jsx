@@ -2,7 +2,7 @@ import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import "./App.css";
 import styles from "./App.module.css";
-import styles from "./components/UI/Modal.module.css";
+import modalStyles from "./components/UI/Modal.module.css";
 import TodoTasksList from "./components/Todos/TodoTasksList.jsx";
 import AddTaskForm from "./components/Todos/AddTaskForm.jsx";
 import Button from "./components/UI/Button.jsx";
@@ -63,8 +63,9 @@ function App() {
   const completedTodos = todos.filter((t) => t.isCompleted);
 
   return (
-    <>
+    <div className={styles.wrapper}>
       <p className={styles.date}>{formattedDate}</p>
+      <hr className={styles.divider} />
 
       {!isModalOpen && (
         <>
@@ -78,11 +79,9 @@ function App() {
             toggleTodo={toggleTodoHandler}
           />
 
-          <hr className={styles.divider} />
-
           {/* COMPLETED */}
 
-          <h2>Completed</h2>
+          <h2 className={styles.completedHeader}>Completed tasks</h2>
           <TodoTasksList
             todos={completedTodos}
             deleteTodo={deleteTodoHandler}
@@ -102,11 +101,11 @@ function App() {
 
       {isModalOpen && (
         <div
-          className={styles.modalBackdrop}
+          className={modalStyles.modalBackdrop}
           onClick={() => setIsModalOpen(false)}
         >
           <div
-            className={styles.modalWindow}
+            className={modalStyles.modalWindow}
             onClick={(e) => e.stopPropagation()}
           >
             <AddTaskForm
@@ -116,7 +115,7 @@ function App() {
           </div>
         </div>
       )}
-    </>
+    </div>
   );
 }
 

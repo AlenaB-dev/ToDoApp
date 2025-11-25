@@ -3,4 +3,6 @@
   margin: 0 auto;
   padding: 3rem;
   text-align: center;
+  border: 1px solid #7fffd4;
+  border-radius: 12px;
 }

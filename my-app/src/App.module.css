@@ -1,19 +1,41 @@
-#root {
-  border: 1px solid #7fffd4;
+.wrapper {
+  border: 1px solid #5ea1a1;
+  padding: 1rem;
   border-radius: 12px;
 }
 
-body {
-  border: 1px solid #7fffd4;
-  padding: 1rem;
-}
-
-.date {
-  border-bottom: double 4px #5ea1a1;
-}
-
 h1 {
-  border-bottom: 2px dotted #7fffd4;
+  font-family: "Quicksand", sans-serif;
+  font-weight: 700;
+  font-size: 2rem;
+  color: #08363d;
+  text-shadow: 0 2px 3px rgba(255, 255, 255, 0.3);
+  position: relative;
+  display: inline-block;
+  margin-bottom: 0;
+}
+
+h1::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 100%;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.25); /* мягкая побелка */
+  border-radius: 2px;
+}
+
+.completedHeader {
+  display: inline-block;
+  padding: 6px 14px;
+  background: rgba(255, 255, 255, 0.25); /* мягкая побелка */
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 10px;
+  backdrop-filter: blur(4px);
+  color: #08363d;
+  font-weight: 600;
+  margin-bottom: 0;
 }
 
 .divider {
