@@ -1,4 +1,8 @@
 import { useState } from "react";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import enGB from "date-fns/locale/en-GB"; // английская локаль
+
 import moduleStyle from "./AddTaskForm.module.css";
 import TodoActions from "./TodoActions.jsx";
 
@@ -38,11 +42,13 @@ const AddTaskForm = ({ onSubmit, onClose }) => {
 
       <label>
         Due date:{" "}
-        <input
+        <DatePicker
           className={moduleStyle.input}
-          type="datetime-local"
-          value={dueDate}
-          onChange={(e) => setDueDate(e.target.value)}
+          selected={dueDate}
+          onChange={(date) => setDueDate(date)}
+          showTimeSelect
+          dateFormat="Pp"
+          locale={enGB}
         />
       </label>
 
