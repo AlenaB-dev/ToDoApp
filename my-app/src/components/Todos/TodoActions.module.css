@@ -2,9 +2,10 @@
   display: flex;
   gap: 10px;
   margin-top: 8px;
+  align-items: center;
 }
 
-.selectCategory {
+.categoryBtn {
   margin-top: 6px;
   padding: 8px 12px;
   border-radius: 8px;
@@ -15,8 +16,18 @@
   transition: all 0.2s ease-in-out;
 }
 
-.selectCategory:focus {
+.categoryBtn:focus {
   outline: none;
   border-color: teal;
   box-shadow: 0 0 8px rgba(0, 128, 128, 0.3);
+}
+
+.categoryBtn:hover {
+  background-color: rgba(255, 255, 255, 0.75);
+}
+
+.categoryBtn.active {
+  background-color: teal;
+  color: #fff;
+  border-color: teal;
 }

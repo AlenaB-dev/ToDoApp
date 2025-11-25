@@ -19,6 +19,7 @@ const AddTaskForm = ({ onSubmit, onClose }) => {
       <label>
         Title:{" "}
         <input
+          className={moduleStyle.input}
           value={title}
           onChange={(e) => setTitle(e.target.value)}
           type="text"
@@ -26,7 +27,11 @@ const AddTaskForm = ({ onSubmit, onClose }) => {
       </label>
       <label>
         Note:{" "}
-        <textarea value={text} onChange={(e) => setText(e.target.value)} />
+        <textarea
+          className={moduleStyle.textarea}
+          value={text}
+          onChange={(e) => setText(e.target.value)}
+        />
       </label>
 
       <TodoActions selected={category} onSelect={setCategory} />
@@ -34,14 +39,17 @@ const AddTaskForm = ({ onSubmit, onClose }) => {
       <label>
         Due date:{" "}
         <input
+          className={moduleStyle.input}
           type="datetime-local"
           value={dueDate}
           onChange={(e) => setDueDate(e.target.value)}
         />
       </label>
 
-      <button onClick={handleSubmit}>Save</button>
-      <button onClick={onClose}>Cancel</button>
+      <div className={moduleStyle.buttons}>
+        <button onClick={handleSubmit}>Save</button>
+        <button onClick={onClose}>Cancel</button>
+      </div>
     </div>
   );
 };

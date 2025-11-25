@@ -8,7 +8,7 @@ const TodoActions = ({ selected, onSelect }) => {
         <button
           key={cat.id}
           onClick={() => onSelect(cat.id)}
-          className={`${styles.selectCategory} ${
+          className={`${styles.categoryBtn} ${
             selected === cat.id ? styles.active : ""
           }`}
           title={cat.label}
