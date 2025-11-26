@@ -89,11 +89,14 @@ function App() {
             emptyMessage="No completed tasks"
           />
 
-          <Button onClick={clearCompletedHandler} className="clear-btn">
+          <Button onClick={clearCompletedHandler} className={styles.clearBtn}>
             Clear
           </Button>
 
-          <Button onClick={() => setIsModalOpen(true)} className="add-btn">
+          <Button
+            onClick={() => setIsModalOpen(true)}
+            className={styles.addBtn}
+          >
             Add new task
           </Button>
         </>

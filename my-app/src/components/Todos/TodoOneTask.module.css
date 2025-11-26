@@ -1,19 +1,22 @@
 .todo {
   display: flex;
   align-items: center;
-  padding: 10px 20px;
+  padding: 5px 15px;
   margin: 15px 0;
   font-size: 1.5rem;
-  border-radius: 5px;
-  border: 2px solid #555;
+  border: 1px solid #555;
   color: #112d49;
-  background-color: #fbfef9;
+  border-radius: 12px;
+  background-color: #cef1f1;
   user-select: none;
 }
 
 .todoText {
   width: 100%;
+  font-size: 0.9rem;
   text-align: left;
+  margin-top: 3px;
+  margin-bottom: 0;
 }
 
 .todoIcon {
@@ -25,13 +28,13 @@
 .completedTodo {
   background-color: unset;
   border-color: gray;
-  color: gray;
+  color: #4e5554;
 }
 
 .todo.completedTodo .todoIcon,
 .todo.completedTodo .checkIcon,
 .todo.completedTodo .deleteIcon {
-  color: gray;
+  color: #4e5554;
 }
 
 .checkIcon,
@@ -69,8 +72,9 @@
 .todoTitle {
   font-size: 1.1rem;
   font-weight: 600;
-  margin-bottom: 3px;
+  margin: 1px;
   color: #0f253d;
+  text-align: left;
 }
 
 /* Примечание / текст */
