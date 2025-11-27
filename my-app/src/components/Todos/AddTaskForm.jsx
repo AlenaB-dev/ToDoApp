@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { FaRegCalendarAlt } from "react-icons/fa";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import enGB from "date-fns/locale/en-GB"; // английская локаль
@@ -41,8 +42,11 @@ const AddTaskForm = ({ onSubmit, onClose }) => {
 
       <TodoActions selected={category} onSelect={setCategory} />
 
-      <label>
-        Due date:{" "}
+      <label className={moduleStyle.datelabel}>
+        <div className={moduleStyle.dateIcon}>
+          Due date <FaRegCalendarAlt className={moduleStyle.calenderIcon} />
+        </div>
+
         <DatePicker
           className={moduleStyle.input}
           selected={dueDate}

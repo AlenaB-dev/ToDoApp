@@ -71,3 +71,21 @@ textarea {
 .addBtn:hover {
   background-color: #056b6a;
 }
+
+.dateIcon {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 1rem;
+  margin: auto;
+}
+
+.calenderIcon {
+  font-size: 1.2rem;
+}
+
+input {
+  width: 100%;
+  padding-left: 35px;
+  box-sizing: border-box;
+}

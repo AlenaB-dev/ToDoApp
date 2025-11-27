@@ -93,24 +93,55 @@
   color: #fff;
 }
 
-/* Time
+.react-datepicker__day--today {
+  background-color: rgba(0, 128, 128, 0.3); /* мягкий акцент */
+  color: #08363d; /* цвет текста */
+  border-radius: 50%; /* круглое выделение */
+  font-weight: 600;
+}
+
+.react-datepicker__day--today:hover {
+  background-color: rgba(0, 128, 128, 0.5); /* чуть ярче при hover */
+  color: teal;
+}
+
+/* Time */
 
 .react-datepicker__time-container {
-  background: rgba(255, 255, 255, 0.25);
   backdrop-filter: blur(6px);
   border-left: 1px solid rgba(255, 255, 255, 0.4);
 }
 
-.react-datepicker__time {
+.react-datepicker__time-container .react-datepicker__time {
   padding: 10px;
+  background: rgba(255, 255, 255, 0.25);
 }
 
-.react-datepicker__time-box ul li {
+.react-datepicker__time-container
+  .react-datepicker__time
+  .react-datepicker__time-box {
   font-family: "Inter", sans-serif;
   color: #08363d;
 }
 
-.react-datepicker__time-box ul li:hover {
+.react-datepicker__time-container
+  .react-datepicker__time
+  .react-datepicker__time-box
+  ul.react-datepicker__time-list {
+  width: 80%;
+}
+
+.react-datepicker__time-container
+  .react-datepicker__time
+  .react-datepicker__time-box
+  ul.react-datepicker__time-list
+  li.react-datepicker__time-list-item:hover {
+  color: #08363d;
+}
+
+/* .react-datepicker__time-box ul li:hover {
   background-color: rgba(0, 128, 128, 0.3);
   color: #08363d;
 } */
+/* 
+
