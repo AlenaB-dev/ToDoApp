@@ -52,7 +52,7 @@ const AddTaskForm = ({ onSubmit, onClose }) => {
           selected={dueDate}
           onChange={(date) => setDueDate(date)}
           showTimeSelect
-          dateFormat="Pp"
+          dateFormat="dd/MM/yyyy HH:mm"
           locale={enGB}
         />
       </label>

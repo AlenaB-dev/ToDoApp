@@ -1,5 +1,7 @@
 import { RiDeleteBin2Line, RiTodoFill } from "react-icons/ri";
 import { FaCheck } from "react-icons/fa";
+import { format } from "date-fns";
+
 import styles from "./TodoOneTask.module.css";
 
 const TodoOneTask = ({ todo, deleteTodo, toggleTodo }) => {
@@ -23,7 +25,7 @@ const TodoOneTask = ({ todo, deleteTodo, toggleTodo }) => {
 
           {todo.dueDate && (
             <span className={styles.todoDate}>
-              {new Date(todo.dueDate).toLocaleString("en-GB")}
+              {format(new Date(todo.dueDate), "dd/MM/yyyy HH:mm")}
             </span>
           )}
         </div>
