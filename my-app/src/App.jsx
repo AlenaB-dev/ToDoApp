@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
 import "./App.css";
+import { getTasks, saveTasks } from "./utils/localStorage.js";
 import styles from "./App.module.css";
 import modalStyles from "./components/UI/Modal.module.css";
 import TodoTasksList from "./components/Todos/TodoTasksList.jsx";
@@ -18,7 +19,11 @@ function App() {
   });
 
   // tasks list
-  const [todos, setTodos] = useState([]);
+  const [todos, setTodos] = useState(() => getTasks());
+
+  useEffect(() => {
+    saveTasks(todos);
+  }, [todos]);
 
   // add task
   const addTodoHandler = ({ text, title, category, dueDate }) => {
