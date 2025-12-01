@@ -1,0 +1,13 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+}
+
+.userName {
+  margin-bottom: 10px;
+}
+
+.password {
+  margin-bottom: 10px;
+}
