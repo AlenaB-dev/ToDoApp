@@ -1,19 +1,18 @@
-const STORAGE_KEY = window.location.hostname.includes("localhost")
-  ? "tasks_dev"
-  : "tasks";
-
 // get tasks
-export function getTasks() {
-  const saved = localStorage.getItem(STORAGE_KEY);
+export function getTasks(username) {
+  const key = `todos_${username}`;
+  const saved = localStorage.getItem(key);
   return saved ? JSON.parse(saved) : [];
 }
 
 // save tasks
-export function saveTasks(tasks) {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(tasks));
+export function saveTasks(username, tasks) {
+  const key = `todos_${username}`;
+  localStorage.setItem(key, JSON.stringify(tasks));
 }
 
 // clear tasks
 export function clearTasks() {
-  localStorage.removeItem(STORAGE_KEY);
+  const key = `todos_${username}`;
+  localStorage.removeItem(key);
 }

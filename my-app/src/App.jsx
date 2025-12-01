@@ -7,8 +7,20 @@ import modalStyles from "./components/UI/Modal.module.css";
 import TodoTasksList from "./components/Todos/TodoTasksList.jsx";
 import AddTaskForm from "./components/Todos/AddTaskForm.jsx";
 import Button from "./components/UI/Button.jsx";
+import SignInForm from "./components/Todos/SignInForm.jsx";
 
 function App() {
+  // singIn form
+  const [user, setUser] = useState(
+    () => localStorage.getItem("currentUser") || null
+  );
+
+  const handleSignIn = (username) => {
+    setUser(username);
+  };
+
+  const isGuest = user === "Guest";
+
   // showing current date and day
   const date = new Date();
   const formattedDate = date.toLocaleDateString("en-GB", {
@@ -19,11 +31,16 @@ function App() {
   });
 
   // tasks list
-  const [todos, setTodos] = useState(() => getTasks());
+  const [todos, setTodos] = useState(() =>
+    user === "Guest" ? [] : getTasks(user)
+  );
+
+  // modal
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
-    saveTasks(todos);
-  }, [todos]);
+    if (!isGuest) saveTasks(user, todos);
+  }, [todos, isGuest, user]);
 
   // add task
   const addTodoHandler = ({ text, title, category, dueDate }) => {
@@ -32,7 +49,7 @@ function App() {
       text,
       category,
       dueDate,
-      isComplited: false,
+      isCompleted: false,
       id: uuidv4(),
     };
     setTodos([...todos, newTodo]);
@@ -42,7 +59,7 @@ function App() {
   const deleteTodoHandler = (id) => {
     setTodos(
       todos.map((todo) =>
-        todo.id === id ? { ...todo, isComplited: !todo.isCompleted } : todo
+        todo.id === id ? { ...todo, isCompleted: !todo.isCompleted } : todo
       )
     );
   };
@@ -61,70 +78,76 @@ function App() {
     setTodos(todos.filter((todo) => !todo.isCompleted));
   };
 
-  // modal
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
   const activeTodos = todos.filter((t) => !t.isCompleted);
   const completedTodos = todos.filter((t) => t.isCompleted);
 
   return (
-    <div className={styles.wrapper}>
-      <p className={styles.date}>{formattedDate}</p>
-      <hr className={styles.divider} />
+    <>
+      {!user ? (
+        <SignInForm onSignIn={handleSignIn} />
+      ) : (
+        <div className={styles.wrapper}>
+          <h2>Welcome, {user}!</h2>
+          <p className={styles.date}>{formattedDate}</p>
+          <hr className={styles.divider} />
 
-      {!isModalOpen && (
-        <>
-          <h1>My ToDos</h1>
+          {!isModalOpen && (
+            <>
+              <h1>My ToDos</h1>
 
-          {/* ACTIVE */}
+              {/* ACTIVE */}
 
-          <TodoTasksList
-            todos={activeTodos}
-            deleteTodo={deleteTodoHandler}
-            toggleTodo={toggleTodoHandler}
-          />
+              <TodoTasksList
+                todos={activeTodos}
+                deleteTodo={deleteTodoHandler}
+                toggleTodo={toggleTodoHandler}
+              />
 
-          {/* COMPLETED */}
+              {/* COMPLETED */}
 
-          <h2 className={styles.completedHeader}>Completed tasks</h2>
-          <TodoTasksList
-            todos={completedTodos}
-            deleteTodo={deleteTodoHandler}
-            toggleTodo={toggleTodoHandler}
-            emptyMessage="No completed tasks"
-          />
+              <h2 className={styles.completedHeader}>Completed tasks</h2>
+              <TodoTasksList
+                todos={completedTodos}
+                deleteTodo={deleteTodoHandler}
+                toggleTodo={toggleTodoHandler}
+                emptyMessage="No completed tasks"
+              />
 
-          <Button onClick={clearCompletedHandler} className={styles.clearBtn}>
-            Clear
-          </Button>
+              <Button
+                onClick={clearCompletedHandler}
+                className={styles.clearBtn}
+              >
+                Clear
+              </Button>
 
-          <Button
-            onClick={() => setIsModalOpen(true)}
-            className={styles.addBtn}
-          >
-            Add new task
-          </Button>
-        </>
-      )}
+              <Button
+                onClick={() => setIsModalOpen(true)}
+                className={styles.addBtn}
+              >
+                Add new task
+              </Button>
+            </>
+          )}
 
-      {isModalOpen && (
-        <div
-          className={modalStyles.modalBackdrop}
-          onClick={() => setIsModalOpen(false)}
-        >
-          <div
-            className={modalStyles.modalWindow}
-            onClick={(e) => e.stopPropagation()}
-          >
-            <AddTaskForm
-              onSubmit={addTodoHandler}
-              onClose={() => setIsModalOpen(false)}
-            />
-          </div>
+          {isModalOpen && (
+            <div
+              className={modalStyles.modalBackdrop}
+              onClick={() => setIsModalOpen(false)}
+            >
+              <div
+                className={modalStyles.modalWindow}
+                onClick={(e) => e.stopPropagation()}
+              >
+                <AddTaskForm
+                  onSubmit={addTodoHandler}
+                  onClose={() => setIsModalOpen(false)}
+                />
+              </div>
+            </div>
+          )}
         </div>
       )}
-    </div>
+    </>
   );
 }
-
 export default App;
