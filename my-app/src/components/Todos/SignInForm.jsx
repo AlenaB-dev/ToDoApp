@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import signInStyle from "./SignInForm.module.css";
 import { registerUser, loginUser } from "../../utils/localStorage";
 
@@ -8,6 +8,12 @@ export default function SignInForm({ onSignIn }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+
+  const emailRef = useRef(null);
+
+  useEffect(() => {
+    emailRef.current?.focus();
+  }, [mode]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -28,13 +34,23 @@ export default function SignInForm({ onSignIn }) {
         setError(result.message);
         return;
       }
-      onSignIn(email);
+      onSignIn(email, result.username);
     }
+    setEmail("");
+    setUsername("");
+    setPassword("");
+    setError("");
   };
 
   const handleGuest = () => {
     onSignIn("Guest");
   };
+
+  useEffect(() => {
+    if (!error) return;
+    const timer = setTimeout(() => setError(""), 4000);
+    return () => clearTimeout(timer);
+  }, [error]);
 
   return (
     <div className={signInStyle.container}>
@@ -44,10 +60,12 @@ export default function SignInForm({ onSignIn }) {
         {error && <p className={signInStyle.error}>{error}</p>}
 
         <input
+          ref={emailRef}
           type="email"
           placeholder="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
+          className={signInStyle.email}
         />
 
         {mode === "register" && (
@@ -71,7 +89,7 @@ export default function SignInForm({ onSignIn }) {
         />
 
         <button type="submit" className={signInStyle.signInBtn}>
-          {mode === "login" ? "Sign In" : "Register"}
+          {mode === "login" ? "Log In" : "Register"}
         </button>
         <button
           onClick={handleGuest}
@@ -81,19 +99,27 @@ export default function SignInForm({ onSignIn }) {
           Continue as Guest
         </button>
 
-        <p className={signInStyle.switchMode}>
+        <div className={signInStyle.switchMode}>
           {mode === "login" ? (
-            <>
-              No account?
-              <span onClick={() => setMode("register")}>Register</span>
-            </>
+            <p>
+              No account?{""}
+              <button
+                type="button"
+                onClick={() => setMode("register")}
+                className={signInStyle.switchBtn}
+              >
+                Register
+              </button>
+            </p>
           ) : (
-            <>
+            <p>
               Already have an account?
-              <span onClick={() => setMode("login")}>Sign in</span>
-            </>
+              <button type="button" onClick={() => setMode("login")}>
+                Log In{" "}
+              </button>
+            </p>
           )}
-        </p>
+        </div>
       </form>
     </div>
   );

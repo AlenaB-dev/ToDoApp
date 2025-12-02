@@ -44,3 +44,7 @@ h1::after {
   height: 1px;
   border: none;
 }
+
+.logoutBtn {
+  font-size: 0.7rem;
+}

@@ -27,15 +27,24 @@ function App() {
 
   // save only of Not a Guest
   useEffect(() => {
-    if (!isGuest) {
-      saveTasks(user, todos);
+    if (isGuest) {
+      setTodos([]); // гость всегда начинает с пустого списка
+      return;
     }
-  }, [todos, user]);
+    setTodos(getTasks(user)); // обычный пользователь — загрузить задачи
+  }, [user]);
 
   // form without SignIn
   if (!user) {
     return <SignInForm onSignIn={handleSignIn} />;
   }
+
+  // log out
+  const handleLogout = () => {
+    localStorage.removeItem("currentUser"); // выход из аккаунта
+    setUser(null); // сброс состояния
+    setTodos([]); // очищаем задачи
+  };
 
   // add task
   const addTodoHandler = ({ text, title, category, dueDate }) => {
@@ -91,7 +100,15 @@ function App() {
         <SignInForm onSignIn={handleSignIn} />
       ) : (
         <div className={styles.wrapper}>
-          <h2>Welcome, {user}!</h2>
+          <Button onClick={handleLogout} className={styles.logoutBtn}>
+            Log out
+          </Button>
+          <h2>
+            {isGuest
+              ? "Welcome, Guest!"
+              : `Welcome, ${usersDB[user]?.username || user}!`}
+          </h2>
+
           <p className={styles.date}>{formattedDate}</p>
           <hr className={styles.divider} />
 
