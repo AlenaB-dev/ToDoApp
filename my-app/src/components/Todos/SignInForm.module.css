@@ -20,3 +20,18 @@
   transition: all 0.2s ease-in-out;
   color: #08363d;
 }
+.signInBtn {
+  margin-bottom: 20px;
+}
+
+.toggle {
+  margin-top: 5px;
+}
+
+.guestBtn,
+.switchBtn {
+  font-size: 0.7rem;
+  margin: 0 auto;
+  background-color: #b0bac4;
+  color: #08363d;
+}

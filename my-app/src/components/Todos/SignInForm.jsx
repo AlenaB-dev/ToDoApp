@@ -101,8 +101,8 @@ export default function SignInForm({ onSignIn }) {
 
         <div className={signInStyle.switchMode}>
           {mode === "login" ? (
-            <p>
-              No account?{""}
+            <p className={signInStyle.toggle}>
+              {/* No account?{""} */}
               <button
                 type="button"
                 onClick={() => setMode("register")}
