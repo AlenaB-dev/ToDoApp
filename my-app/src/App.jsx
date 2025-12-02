@@ -14,10 +14,10 @@ function App() {
   const [user, setUser] = useState(() => localStorage.getItem("currentUser"));
   const isGuest = user === "Guest";
 
-  const handleSignIn = (username) => {
-    setUser(username);
-    if (username !== "Guest") {
-      localStorage.setItem("currentUser", username);
+  const handleSignIn = (email) => {
+    setUser(email);
+    if (email !== "Guest") {
+      localStorage.setItem("currentUser", email);
     }
   };
 
@@ -27,8 +27,10 @@ function App() {
 
   // save only of Not a Guest
   useEffect(() => {
-    if (!isGuest) saveTasks(user, todos);
-  }, [todos, user, isGuest]);
+    if (!isGuest) {
+      saveTasks(user, todos);
+    }
+  }, [todos, user]);
 
   // form without SignIn
   if (!user) {
