@@ -11,6 +11,7 @@ export default function SignInForm({ onSignIn }) {
 
     // safe username to localStorage
     localStorage.setItem("currentUser", username);
+
     // callback in App
     onSignIn(username);
     //clear form
@@ -19,9 +20,7 @@ export default function SignInForm({ onSignIn }) {
   };
 
   const handleGuest = () => {
-    const guestName = "Guest";
-    localStorage.setItem("currentUser", guestName);
-    onSignIn(guestName);
+    onSignIn("Guest");
   };
 
   return (
@@ -29,7 +28,7 @@ export default function SignInForm({ onSignIn }) {
       <form onSubmit={handleSubmit} className={signInStyle.form}>
         <input
           type="text"
-          placeholder="Username"
+          placeholder="Email or Username"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
           className={signInStyle.userName}
@@ -41,10 +40,14 @@ export default function SignInForm({ onSignIn }) {
           onChange={(e) => setPassword(e.target.value)}
           className={signInStyle.password}
         />
+
+        <button type="submit" className={signInStyle.signInBtn}>
+          Sign In
+        </button>
         <button
           onClick={handleGuest}
           className={signInStyle.guestBtn}
-          type="submit"
+          type="button"
         >
           Sign In as Guest
         </button>

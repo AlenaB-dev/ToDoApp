@@ -11,36 +11,29 @@ import SignInForm from "./components/Todos/SignInForm.jsx";
 
 function App() {
   // singIn form
-  const [user, setUser] = useState(
-    () => localStorage.getItem("currentUser") || null
-  );
+  const [user, setUser] = useState(() => localStorage.getItem("currentUser"));
+  const isGuest = user === "Guest";
 
   const handleSignIn = (username) => {
     setUser(username);
+    if (username !== "Guest") {
+      localStorage.setItem("currentUser", username);
+    }
   };
 
-  const isGuest = user === "Guest";
-
-  // showing current date and day
-  const date = new Date();
-  const formattedDate = date.toLocaleDateString("en-GB", {
-    weekday: "long",
-    day: "2-digit",
-    month: "long",
-    year: "numeric",
-  });
-
-  // tasks list
-  const [todos, setTodos] = useState(() =>
-    user === "Guest" ? [] : getTasks(user)
-  );
-
-  // modal
+  // загрузить задачи при входе
+  const [todos, setTodos] = useState(() => getTasks(user));
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  // save only of Not a Guest
   useEffect(() => {
     if (!isGuest) saveTasks(user, todos);
-  }, [todos, isGuest, user]);
+  }, [todos, user, isGuest]);
+
+  // form without SignIn
+  if (!user) {
+    return <SignInForm onSignIn={handleSignIn} />;
+  }
 
   // add task
   const addTodoHandler = ({ text, title, category, dueDate }) => {
@@ -81,6 +74,15 @@ function App() {
   const activeTodos = todos.filter((t) => !t.isCompleted);
   const completedTodos = todos.filter((t) => t.isCompleted);
 
+  // showing current date
+  const date = new Date();
+  const formattedDate = date.toLocaleDateString("en-GB", {
+    weekday: "long",
+    day: "2-digit",
+    month: "long",
+    year: "numeric",
+  });
+
   return (
     <>
       {!user ? (
@@ -96,7 +98,6 @@ function App() {
               <h1>My ToDos</h1>
 
               {/* ACTIVE */}
-
               <TodoTasksList
                 todos={activeTodos}
                 deleteTodo={deleteTodoHandler}
@@ -104,7 +105,6 @@ function App() {
               />
 
               {/* COMPLETED */}
-
               <h2 className={styles.completedHeader}>Completed tasks</h2>
               <TodoTasksList
                 todos={completedTodos}
