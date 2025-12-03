@@ -1,7 +1,13 @@
 import { useState, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
 import "./App.css";
-import { getTasks, saveTasks } from "./utils/localStorage.js";
+import {
+  getUsersDB,
+  loginUser,
+  registerUser,
+  getTasks,
+  saveTasks,
+} from "./utils/localStorage.js";
 import styles from "./App.module.css";
 import modalStyles from "./components/UI/Modal.module.css";
 import TodoTasksList from "./components/Todos/TodoTasksList.jsx";
@@ -14,12 +20,17 @@ function App() {
   const [user, setUser] = useState(() => localStorage.getItem("currentUser"));
   const isGuest = user === "Guest";
 
-  const handleSignIn = (email) => {
+  const handleSignIn = (email, username) => {
     setUser(email);
     if (email !== "Guest") {
       localStorage.setItem("currentUser", email);
+      localStorage.setItem("currentUsername", username);
     }
   };
+
+  //user DB
+  const db = getUsersDB();
+  const storedUsername = localStorage.getItem("");
 
   // загрузить задачи при входе
   const [todos, setTodos] = useState(() => getTasks(user));
@@ -103,11 +114,7 @@ function App() {
           <Button onClick={handleLogout} className={styles.logoutBtn}>
             Log out
           </Button>
-          <h2>
-            {isGuest
-              ? "Welcome, Guest!"
-              : `Welcome, ${usersDB[user]?.username || user}!`}
-          </h2>
+          <h2>{isGuest ? "Welcome, Guest!" : `Welcome, ${username}!`}</h2>
 
           <p className={styles.date}>{formattedDate}</p>
           <hr className={styles.divider} />

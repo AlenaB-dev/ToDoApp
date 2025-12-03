@@ -54,11 +54,3 @@ export function saveTasks(userEmail, tasks) {
 export function clearTasks(userEmail) {
   localStorage.removeItem(`todos_${userEmail}`);
 }
-
-// //user database
-// userDB = {
-//   "test@mail.com": {
-//     password: "12345",
-//     username: "Alena",
-//   },
-// };
