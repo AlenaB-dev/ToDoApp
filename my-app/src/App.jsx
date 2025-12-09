@@ -30,7 +30,7 @@ function App() {
 
   //user DB
   const db = getUsersDB();
-  const storedUsername = localStorage.getItem("");
+  const storedUsername = localStorage.getItem("currentUsername");
 
   // загрузить задачи при входе
   const [todos, setTodos] = useState(() => getTasks(user));
@@ -111,10 +111,14 @@ function App() {
         <SignInForm onSignIn={handleSignIn} />
       ) : (
         <div className={styles.wrapper}>
-          <Button onClick={handleLogout} className={styles.logoutBtn}>
-            Log out
-          </Button>
-          <h2>{isGuest ? "Welcome, Guest!" : `Welcome, ${username}!`}</h2>
+          <div className={styles.topBar}>
+            <span className={styles.smallGreeting}>
+              {isGuest ? "Welcome, Guest!" : `Welcome, ${storedUsername}!`}
+            </span>
+            <Button onClick={handleLogout} className={styles.logoutBtn}>
+              Log out
+            </Button>
+          </div>
 
           <p className={styles.date}>{formattedDate}</p>
           <hr className={styles.divider} />

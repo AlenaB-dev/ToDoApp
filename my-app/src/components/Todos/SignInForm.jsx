@@ -25,7 +25,12 @@ export default function SignInForm({ onSignIn }) {
         setError(result.message);
         return;
       }
-      onSignIn(email);
+      onSignIn(email, username);
+
+      setUsername("");
+      setPassword("");
+      setError("");
+
       return;
     }
     if (mode === "login") {
