@@ -10,5 +10,5 @@ export default defineConfig({
       },
     }),
   ],
-  base: "/my-app",
+  base: "/ToDoApp/",
 });
