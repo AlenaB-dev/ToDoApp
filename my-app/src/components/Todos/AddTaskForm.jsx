@@ -54,6 +54,16 @@ const AddTaskForm = ({ onSubmit, onClose }) => {
           showTimeSelect
           dateFormat="dd/MM/yyyy HH:mm"
           locale={enGB}
+          popperPlacement="bottom-start"
+          popperModifiers={[
+            {
+              name: "preventOverflow",
+              options: {
+                rootBoundary: "viewport",
+                tether: false,
+              },
+            },
+          ]}
         />
       </label>
 
