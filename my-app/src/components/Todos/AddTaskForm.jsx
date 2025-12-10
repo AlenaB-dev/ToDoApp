@@ -1,11 +1,10 @@
 import { useState } from "react";
 import { FaRegCalendarAlt } from "react-icons/fa";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
-import enGB from "date-fns/locale/en-GB"; // английская локаль
+import { DayPicker } from "react-day-picker";
+import "react-day-picker/dist/style.css";
 
 import moduleStyle from "./AddTaskForm.module.css";
-import "../UI/datepicker.css";
+import "../UI/daypicker.css";
 import TodoActions from "./TodoActions.jsx";
 
 const AddTaskForm = ({ onSubmit, onClose }) => {
@@ -42,30 +41,11 @@ const AddTaskForm = ({ onSubmit, onClose }) => {
 
       <TodoActions selected={category} onSelect={setCategory} />
 
-      <label className={moduleStyle.datelabel}>
-        <div className={moduleStyle.dateIcon}>
-          Due date <FaRegCalendarAlt className={moduleStyle.calenderIcon} />
-        </div>
+      <div className={moduleStyle.dateIcon}>
+        Due date <FaRegCalendarAlt className={moduleStyle.calenderIcon} />
+      </div>
 
-        <DatePicker
-          className={moduleStyle.input}
-          selected={dueDate}
-          onChange={(date) => setDueDate(date)}
-          showTimeSelect
-          dateFormat="dd/MM/yyyy HH:mm"
-          locale={enGB}
-          popperPlacement="bottom-start"
-          popperModifiers={[
-            {
-              name: "preventOverflow",
-              options: {
-                rootBoundary: "viewport",
-                tether: false,
-              },
-            },
-          ]}
-        />
-      </label>
+      <DayPicker mode="single" selected={dueDate} onSelect={setDueDate} />
 
       <div className={moduleStyle.buttons}>
         <button onClick={handleSubmit}>Save</button>

@@ -1,0 +1,98 @@
+/* === BASE OVERRIDES FOR DAYPICKER (remove default blue theme) === */
+.rdp-root {
+  --rdp-cell-size: 38px;
+  --rdp-accent-color: teal;
+  --rdp-accent-color-dark: teal;
+  --rdp-selected-color: #fff;
+  --rdp-background-color: transparent;
+  --rdp-outline: none;
+  --rdp-selected-border: none;
+}
+
+/* === CALENDAR WRAPPER (GLASS) === */
+.rdp-months {
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 12px;
+  padding: 12px;
+  font-family: "Inter", sans-serif;
+  color: #08363d;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* === MONTH HEADER === */
+.rdp-month_caption {
+  display: flex;
+  justify-content: center;
+  font-weight: 600;
+  color: #08363d;
+  margin-bottom: 8px;
+}
+
+/* === NAVIGATION BUTTONS === */
+.rdp-nav {
+  inset-block-start: auto;
+}
+
+.rdp-nav_button {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transition: all 0.2s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.rdp-nav_button:hover {
+  background: rgba(0, 128, 128, 0.3);
+}
+
+.rdp-nav_button svg {
+  stroke: #08363d !important; /* actual arrow color */
+  width: 20px;
+  height: 20px;
+}
+
+/* === WEEKDAY NAMES === */
+.rdp-weekdays {
+  color: #08363d;
+  font-weight: 600;
+  padding: 4px 0;
+}
+
+/* === DAY CELLS === */
+.rdp-day_button {
+  border-radius: 6px;
+  transition: all 0.2s ease-in-out;
+  color: #08363d;
+}
+
+.rdp-day_button:hover {
+  background: rgba(0, 128, 128, 0.3);
+  color: #08363d;
+}
+
+/* === SELECTED DAY === */
+.rdp-selected .rdp-day_button {
+  background: teal;
+  color: white;
+  border-radius: 6px;
+  border: none;
+}
+
+/* === TODAY DAY === */
+.rdp-today {
+  background: rgba(0, 128, 128, 0.25);
+  color: #08363d;
+  border-radius: 50%;
+  font-weight: 600;
+}
+
+.rdp-today:hover {
+  background: rgba(0, 128, 128, 0.45);
+  color: teal;
+  border-radius: 6px;
+}
