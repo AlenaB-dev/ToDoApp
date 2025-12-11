@@ -80,7 +80,7 @@ textarea {
   align-items: center;
   gap: 6px;
   font-size: 1rem;
-  margin: auto;
+  margin: 10px auto;
 }
 
 .calenderIcon {

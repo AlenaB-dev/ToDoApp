@@ -1,16 +1,32 @@
-.form {
+.container {
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  width: 200px;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
 }
 
-.userName {
-  margin-bottom: 10px;
+.form {
+  width: 100%;
+  max-width: 360px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+
+  padding: 1.5rem;
+  border-radius: 12px;
+  backdrop-filter: blur(6px);
+  background: rgba(255, 255, 255, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+
+  text-align: center;
+  box-sizing: border-box;
 }
 
 .password,
-.email {
-  margin-top: 6px;
+.email,
+.userName {
   padding: 8px 12px;
   border-radius: 8px;
   border: 1px solid rgba(0, 0, 0, 0.2);
@@ -19,19 +35,36 @@
   font-size: 1rem;
   transition: all 0.2s ease-in-out;
   color: #08363d;
+  box-sizing: border-box;
 }
+
+.signInBtn,
+.guestBtn {
+  padding: 0.75rem;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+}
+
 .signInBtn {
-  margin-bottom: 20px;
+  background: teal;
+  color: white;
+  font-weight: 600;
 }
 
-.toggle {
-  margin-top: 5px;
+.guestBtn {
+  background: rgba(0, 128, 128, 0.2);
 }
 
-.guestBtn,
+.switchMode {
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+}
+
 .switchBtn {
-  font-size: 0.7rem;
-  margin: 0 auto;
-  background-color: #b0bac4;
-  color: #08363d;
+  background: none;
+  border: none;
+  color: teal;
+  text-decoration: underline;
+  cursor: pointer;
 }
