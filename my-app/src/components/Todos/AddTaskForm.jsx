@@ -12,9 +12,40 @@ const AddTaskForm = ({ onSubmit, onClose }) => {
   const [text, setText] = useState("");
   const [category, setCategory] = useState("");
   const [dueDate, setDueDate] = useState("");
+  const [titleError, setTitleError] = useState("");
+  const [textError, setTextError] = useState("");
+
+  // const filterEnglish = (value, maxLength) => {
+  //   return value.replace(/[^a-zA-Z0-9\s.,!?'"()-]/g, "").slice(0, maxLength);
+  // };
+
+  const validateEnglish = (value, maxLength) => {
+    if (/[^a-zA-Z0-9\s.,!?'"()-]/.test(value)) {
+      return "Only English characters are allowed";
+    }
+
+    if (value.length > maxLength) {
+      return `Maximum ${maxLength} characters`;
+    }
+
+    return "";
+  };
 
   const handleSubmit = () => {
-    onSubmit({ title, text, category, dueDate });
+    if (!title.trim()) {
+      setTitleError("Title is required");
+      return;
+    }
+
+    if (titleError || textError) return;
+
+    onSubmit({
+      title: title.trim(),
+      text: text.trim(),
+      category,
+      dueDate,
+    });
+
     onClose();
   };
 
@@ -25,18 +56,32 @@ const AddTaskForm = ({ onSubmit, onClose }) => {
         Title:{" "}
         <input
           className={moduleStyle.input}
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
           type="text"
+          value={title}
+          onChange={(e) => {
+            const value = e.target.value;
+            const error = validateEnglish(value, 40);
+            if (!error) setTitle(value.slice(0, 40));
+            setTitleError(error);
+          }}
         />
+        <small className={moduleStyle.counter}>{title.length}/40</small>
+        {titleError && <p className={moduleStyle.error}>{titleError}</p>}
       </label>
       <label>
         Note:{" "}
         <textarea
           className={moduleStyle.textarea}
           value={text}
-          onChange={(e) => setText(e.target.value)}
+          onChange={(e) => {
+            const value = e.target.value;
+            const error = validateEnglish(value, 200);
+            if (!error) setText(value.slice(0, 200));
+            setTextError(error);
+          }}
         />
+        <small className={moduleStyle.counter}>{title.length}/200</small>
+        {textError && <p className={moduleStyle.error}>{textError}</p>}
       </label>
 
       <TodoActions selected={category} onSelect={setCategory} />
