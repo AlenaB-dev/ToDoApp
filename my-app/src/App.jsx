@@ -125,37 +125,41 @@ function App() {
 
           {!isModalOpen && (
             <>
-              <h1>My ToDos</h1>
+              <div className={styles.content}>
+                <h1>My ToDos</h1>
 
-              {/* ACTIVE */}
-              <TodoTasksList
-                todos={activeTodos}
-                deleteTodo={deleteTodoHandler}
-                toggleTodo={toggleTodoHandler}
-              />
+                {/* ACTIVE */}
+                <TodoTasksList
+                  todos={activeTodos}
+                  deleteTodo={deleteTodoHandler}
+                  toggleTodo={toggleTodoHandler}
+                />
 
-              {/* COMPLETED */}
-              <h2 className={styles.completedHeader}>Completed tasks</h2>
-              <TodoTasksList
-                todos={completedTodos}
-                deleteTodo={deleteTodoHandler}
-                toggleTodo={toggleTodoHandler}
-                emptyMessage="No completed tasks"
-              />
+                {/* COMPLETED */}
+                <h2 className={styles.completedHeader}>Completed tasks</h2>
+                <TodoTasksList
+                  todos={completedTodos}
+                  deleteTodo={deleteTodoHandler}
+                  toggleTodo={toggleTodoHandler}
+                  emptyMessage="No completed tasks"
+                />
+              </div>
 
-              <Button
-                onClick={clearCompletedHandler}
-                className={styles.clearBtn}
-              >
-                Clear
-              </Button>
+              <div className={styles.bottomActions}>
+                <Button
+                  onClick={clearCompletedHandler}
+                  className={styles.clearBtn}
+                >
+                  Clear
+                </Button>
 
-              <Button
-                onClick={() => setIsModalOpen(true)}
-                className={styles.addBtn}
-              >
-                Add new task
-              </Button>
+                <Button
+                  onClick={() => setIsModalOpen(true)}
+                  className={styles.addBtn}
+                >
+                  Add new task
+                </Button>
+              </div>
             </>
           )}
 
