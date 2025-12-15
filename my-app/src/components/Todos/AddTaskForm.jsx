@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { FaRegCalendarAlt } from "react-icons/fa";
 import { DayPicker } from "react-day-picker";
 import "react-day-picker/dist/style.css";
@@ -14,10 +14,11 @@ const AddTaskForm = ({ onSubmit, onClose }) => {
   const [dueDate, setDueDate] = useState("");
   const [titleError, setTitleError] = useState("");
   const [textError, setTextError] = useState("");
+  const [shakeTitle, setShakeTitle] = useState("");
+  const [shakeText, setShakeText] = useState("");
 
-  // const filterEnglish = (value, maxLength) => {
-  //   return value.replace(/[^a-zA-Z0-9\s.,!?'"()-]/g, "").slice(0, maxLength);
-  // };
+  const titleRef = useRef(null);
+  const textRef = useRef(null);
 
   const validateEnglish = (value, maxLength) => {
     if (/[^a-zA-Z0-9\s.,!?'"()-]/.test(value)) {
@@ -34,10 +35,23 @@ const AddTaskForm = ({ onSubmit, onClose }) => {
   const handleSubmit = () => {
     if (!title.trim()) {
       setTitleError("Title is required");
+      setShakeTitle(true);
+      setTimeout(() => setShakeTitle(false), 350);
+      titleRef.current?.focus();
       return;
     }
 
-    if (titleError || textError) return;
+    if (titleError) {
+      titleRef.current?.focus();
+      titleRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
+      return;
+    }
+
+    if (textError) {
+      textError.current?.focus();
+      textRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
+      return;
+    }
 
     onSubmit({
       title: title.trim(),
@@ -55,14 +69,24 @@ const AddTaskForm = ({ onSubmit, onClose }) => {
       <label>
         Title:{" "}
         <input
-          className={moduleStyle.input}
+          ref={titleRef}
+          className={`${moduleStyle.input} ${
+            titleError && shakeTitle ? moduleStyle.shake : ""
+          }`}
           type="text"
           value={title}
           onChange={(e) => {
             const value = e.target.value;
             const error = validateEnglish(value, 40);
-            if (!error) setTitle(value.slice(0, 40));
-            setTitleError(error);
+
+            if (error) {
+              setTitleError(error);
+              setShakeTitle(true);
+              setTimeout(() => setShakeTitle(false), 350);
+              return;
+            }
+            setTitle(value);
+            setTitleError("");
           }}
         />
         <small className={moduleStyle.counter}>{title.length}/40</small>
@@ -71,16 +95,27 @@ const AddTaskForm = ({ onSubmit, onClose }) => {
       <label>
         Note:{" "}
         <textarea
-          className={moduleStyle.textarea}
+          ref={textRef}
+          className={`${moduleStyle.textarea} ${
+            textError && shakeText ? moduleStyle.shake : ""
+          }`}
           value={text}
           onChange={(e) => {
             const value = e.target.value;
             const error = validateEnglish(value, 200);
-            if (!error) setText(value.slice(0, 200));
-            setTextError(error);
+
+            if (error) {
+              setTextError(error);
+              setShakeText(true);
+              setTimeout(() => setShakeText(false), 350);
+              return;
+            }
+
+            setText(value);
+            setTextError("");
           }}
         />
-        <small className={moduleStyle.counter}>{title.length}/200</small>
+        <small className={moduleStyle.counter}>{text.length}/200</small>
         {textError && <p className={moduleStyle.error}>{textError}</p>}
       </label>
 
