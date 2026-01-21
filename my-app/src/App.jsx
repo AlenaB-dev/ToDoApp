@@ -72,11 +72,7 @@ function App() {
 
   // delete task
   const deleteTodoHandler = (id) => {
-    setTodos(
-      todos.map((todo) =>
-        todo.id === id ? { ...todo, isCompleted: !todo.isCompleted } : todo
-      )
-    );
+    setTodos(todos.filter((todo) => todo.id !== id));
   };
 
   // toggle completed / active
